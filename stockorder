@@ -1,0 +1,84 @@
+{% if letter_head and not no_letterhead -%}
+    <div class="letter-head">{{ letter_head }}</div>
+ 
+{%- endif %}
+
+<div class="row">
+    <div class="col-xs-6">  
+	<p class="text-center"><font size = "4"><big><b>{{ "Transfer Slip" }}</b></font></big></p><br>
+	<p class="text-left">From : <big><b>{{ doc.from_warehouse or '' }}</b></big></p><br>
+	<p class="text-left">To :  <big><b>{{ doc.to_warehouse or '' }}</b></big></font></p>
+    </div>
+    <div class="col-xs-6">  
+	<p class="text-center">Barcode</p>
+    </div>
+</div>
+
+
+<table class="table table-condensed table-hover table-bordered">
+	
+        <tr>
+            <th>No</th>
+            <th>Brand</th>
+            <th>Code</th>
+            <th>Type</th>
+	    <th>Description</th>
+            <th class="text-right">Qty</th>
+	   
+        </tr>
+        {%- for row in doc.items -%}
+	
+           <tr>
+
+            <td style="width: 4%;">{{ row.idx }}</td>
+	    <td style="width: 15%;">{{ row.item_name }}</td>
+            <td style="width: 15%;">{{ row.item_name }}</td>
+            <td style="width: 15%;">{{ row.description }}</td>
+	    <td style="width: 35%;">{{ row.description }}</td>
+            <td style="width: 15%; text-align: right;">{{ row.qty or 0.00}}</td>
+           </tr>
+      
+        {%- endfor -%}
+
+</table>
+
+</div class="row">
+  <div class="col-xs-6">  
+  	<table >
+        	<tr>
+            		<td>Issued By</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		<tr>
+			<td>Sales Person</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		<tr>
+			<td>Printed On</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		
+       
+	</table>   
+    </div>
+     <div class="col-xs-6">  
+  	<table >
+        	<tr>
+            		<td>Total Qty</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		<tr>
+			<td>Page</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		<tr>
+			<td>Printed On</td>
+			<td>{{ doc.owner }}</td>
+		</tr>
+		
+       
+	</table>   
+    </div>
+</div>
+
+
