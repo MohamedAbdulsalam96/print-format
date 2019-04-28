@@ -1,0 +1,158 @@
+{% if letter_head and not no_letterhead -%}
+    <div class="letter-head">{{ letter_head }}</div>
+ 
+{%- endif %}
+
+<div class="row">
+    <div class="col-xs-6">  
+	<p class="text-center"><font size = "4"><big><b>{{ "Lab Order Form" }}</b></font></big></p><br>
+	<p class="text-left"><b>Branch</b> : Ehsan Optics</b></p><br>
+	<p class="text-left"><b>Order Date<b> :  <b>{{ doc.transaction_date }}</b></font></p>
+	<p class="text-left"><b>Delivery Date<b> :  <b>{{ doc.delivery_date }}</b></font></p>
+	<p class="text-left"><b>Lab<b> :  <b>{{ doc.delivery_date }}</b></font></p>
+    </div>
+    <div class="col-xs-6">  
+	<p class="text-center">Barcode</p>
+    </div>
+</div>
+<p>
+<p><big>Distance</big></p>
+</p>
+<table class="table table-condensed table-hover table-bordered">
+	
+        <tr>
+	    <th></th>
+            <th>SPH</th>
+            <th>CYL</th>
+            <th>AXIS</th>
+            <th>VA</th>
+	    <th>SPH</th>
+            <th>CYL</th>
+            <th>AXIS</th>
+            <th>VA</th>
+        </tr>
+	 <tr>
+	    <th>Distance</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+	    <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+	 <tr>
+	    <th>Reading</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+	    <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+	<tr>
+	    
+            <td ></td>
+            <td>Add</td>
+            
+            <td colspan = "2"></td>
+	  
+		<td ></td>
+		  <td>Add</td>
+            <td colspan = "2"></td>
+            <td></td>
+        
+        </tr>
+	<tr>
+		<td colspan = "10">Frame/Model:<br>Lense(R):<br>Lense(L):</td>
+	<tr>
+	<tr>
+		<td colspan = "2">Frame/Model:<br>Lense(R):<br>Lense(L):</td>
+	<tr>
+</table>
+<table class="table table-condensed table-hover table-bordered">
+	
+        <tr>
+            <th>Sl</th>
+            <th>Type</th>
+            <th>Description(No GST for items with *)</th>
+            <th class="text-right">Amount</th>
+	   
+        </tr>
+        {%- for row in doc.items -%}
+	
+           <tr>
+
+            <td style="width: 4%;">{{ row.idx }}</td>
+	    <td style="width: 20%;">{{ row.item_name }}</td>
+            <td style="width: 55%;">{{ row.description }}</td>
+           
+            <td style="width: 15%; text-align: right;">{{ row.get_formatted("amount", doc) or 0.00}}</td>
+           </tr>
+      
+        {%- endfor -%}
+
+</table>
+
+<div class="row">
+    <div class="col-xs-6">  
+	<table class="table table-condensed table-hover table-bordered" >
+        <tr>
+            <th>Storage Location</th>
+        </tr>
+        <tr>
+		<td>Remarks:-<br>Reference No:</td>		
+	</tr>
+	</table>     
+    </div>
+    <div class="col-xs-6">  
+  	<table class="table table-condensed table-hover table-bordered">
+        	<tr>
+            		<td>Rounding Adjustment</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		<tr>
+			<td>Total Amount Due</td>
+			<td>{{ doc.net_total }}</td>
+		</tr>
+		<tr>
+			<td>Cash Received</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		<tr>
+			<td>Balance Due</td>
+			<td>{{ doc.outstanding_amount }}</td>
+        	</tr>
+       
+	</table>   
+    </div>
+</div>
+<div class="row">
+	<div class="col-xs-12">{{doc.terms}}</div>
+</div>
+
+</div class="row">
+  <div class="col-xs-6">  
+  	<table >
+        	<tr>
+            		<td>Issued By</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		<tr>
+			<td>Sales Person</td>
+			<td>{{ doc.net_total }}</td>
+		</tr>
+		<tr>
+			<td>Printed On</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		
+       
+	</table>   
+    </div>
+</div>
+
+
