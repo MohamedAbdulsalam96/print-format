@@ -1,0 +1,195 @@
+{% if letter_head and not no_letterhead -%}
+    <div class="letter-head">{{ letter_head }}</div>
+ 
+{%- endif %}
+
+<div class="row">
+    <div class="col-xs-6">  
+	<p class="text-center"><font size = "4"><big><b>{{ "Spectacle Order Form" }}</b></font></big></p><br>
+	<p class="text-left"><b>Branch</b> : Ehsan Optics</b></p><br>
+	<p class="text-left"><b>Order Date<b> :  <b>{{ doc.transaction_date }}</b></font></p>
+	<p class="text-left"><b>Delivery Date<b> :  <b>{{ doc.delivery_date }}</b></font></p>
+	<p class="text-left"><b>Lab<b> :  <b>{{ doc.delivery_date }}</b></font></p>
+    </div>
+    <div class="col-xs-6">  
+	<p class="text-center">Barcode</p>
+    </div>
+</div>
+Distance
+
+<table class="table table-condensed table-hover table-bordered">
+	
+        <tr>
+	    <th></th>
+            <th>SPH</th>
+            <th>CYL</th>
+            <th>AXIS</th>
+            <th>VA</th>
+	    <th>SPH</th>
+            <th>CYL</th>
+            <th>AXIS</th>
+            <th>VA</th>
+        </tr>
+	 <tr>
+	    <th>Distance</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+	    <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+	 <tr>
+	    <th>Reading</th>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+	    <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+        </tr>
+	<tr>
+	    
+            <td ></td>
+            <td>Add</td>
+            
+            <td colspan = "2"></td>
+	  
+		<td ></td>
+		  <td>Add</td>
+            <td colspan = "2"></td>
+            <td></td>
+        
+        </tr>
+	<tr>
+		<td colspan = "10">Frame/Model:<br><br>Lense(R):<br><br>Lense(L):</td>
+	<tr>
+</table>
+<table class="table table-condensed table-hover table-bordered">
+	
+	<tr>
+		<td style="width: 15%;">Height (mm) </td>
+		<td style="width: 15%;"></td>
+		<td style="width: 15%;">Frame Size (mm) </td>
+		<td style="width: 15%;"></td>
+		<td style="width: 15%;">R/L.P.D(mm) </td>
+		<td style="width: 15%;"></td>
+	<tr>
+	<tr>
+		<td style="width: 15%;">Prism (R) </td>
+		<td style="width: 15%;"></td>
+		<td style="width: 15%;">Prism (L) </td>
+		<td style="width: 15%;"></td>
+		<td style="width: 15%;">Near/Total .D </td>
+		<td style="width: 15%;"></td>
+	<tr>
+	
+</table>
+<table class="table table-bordered table-condensed">
+	<tr>
+		<td style="width: 25%;">Name ID</td>
+		<td style="width: 25%;"><b>{{ doc.name }}</b></td>
+		<td style="width: 25%;">Age (M/F)</td>
+		<td style="width: 25%;"><b></b></td>
+	</tr>
+	<tr>
+		<td style="width: 25%;">IC No</td>
+		<td style="width: 25%;"><b>{{ doc.name }}</b></td>
+		<td style="width: 25%;">Home No</td>
+		<td style="width: 25%;"><b></b></td>
+	</tr>
+	<tr>
+		<td style="width: 25%;">Address</td>
+		<td style="width: 25%;">{{ doc.address_display }}</td>
+		<td style="width: 25%;">Office No</td>
+		<td style="width: 25%;"></td>
+	</tr>
+	<tr>
+		<td style="width: 25%;"></td>
+		<td style="width: 25%;"></td>
+		<td style="width: 25%;">HP No</td>
+		<td style="width: 25%;"></td>
+	</tr>
+	<tr>
+		<td style="width: 25%;"></td>
+		<td style="width: 25%;"></td>
+		<td style="width: 25%;">Other No</td>
+		<td style="width: 25%;"></td>
+	</tr>
+</table>
+<table class="table table-condensed table-hover table-bordered">
+	<tr>
+   	   <th>Type</th>
+      	   <th>Description</th>
+      	   <th class="text-right">Amount</th>
+    	</tr>
+	 {%- for row in doc.items -%}
+		<tr>
+			<td style="width: 25%;">{{ row.item_code }}</td>	
+						<td style="width: 25%;">{{ row.description}}</td>
+						<td style="width: 25%; text-align: right;">{{ row.amount }}</td>
+		</tr>
+	{%- endfor -%}
+
+</table>
+<div class="row">
+    <div class="col-xs-6">  
+	<table class="table table-condensed table-hover table-bordered" >
+        <tr>
+            <th>Storage Location</th>
+        </tr>
+        <tr>
+		<td>Remarks:-<br>Reference No:<br><br><br></td>		
+	</tr>
+	</table>     
+    </div>
+    <div class="col-xs-6" >  
+  	<table class="table table-condensed table-hover table-bordered" >
+     		<tr>
+			<td style="width: 50%;">Rounding Adjustment</td>
+			<td style="width: 50%;text-align: right;">{{ doc.total }}</td>
+		</tr>
+		<tr>
+			<td style="width: 50%;">Total Bill Amount</td>
+			<td style="width: 50%;text-align: right;">{{ doc.total }}</td>
+		</tr>
+		<tr>
+			<td style="width: 50%;">Total Amount Due</td>
+			<td style="width: 50%;text-align: right;">{{ doc.total }}</td>
+		</tr>
+		<tr>
+			<td style="width: 50%;">Cash Recieved</td>
+			<td style="width: 50%;text-align: right;">{{ doc.total }}</td>
+		</tr>
+		
+	</table>    
+    </div>
+</div>
+
+
+</div class="row">
+  <div class="col-xs-6">  
+  	<table >
+        	<tr>
+            		<td>Issued By</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		<tr>
+			<td>Sales Person</td>
+			<td>{{ doc.net_total }}</td>
+		</tr>
+		<tr>
+			<td>Printed On</td>
+			<td>{{ doc.rounded_total }}</td>
+		</tr>
+		
+       
+	</table>   
+    </div>
+</div>
+
+
